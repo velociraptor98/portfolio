@@ -1,3 +1,22 @@
 .home {
   overflow-x: hidden;
 }
+
+/* Experiences laid out inline as a row of cards (stacks on smaller screens). */
+.experiences {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--spaceL);
+  width: 100%;
+  max-width: var(--maxWidthXL);
+  margin: 0 auto;
+  padding: var(--space5XL) var(--spaceOuter);
+
+  @media (--mediaTablet) {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spaceXL);
+    padding: var(--space4XL) var(--spaceOuter);
+  }
+}

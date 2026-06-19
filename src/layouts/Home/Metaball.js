@@ -1,6 +1,6 @@
 import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion, useSpring } from 'framer-motion';
 import { useInViewport, useWindowSize } from 'hooks';
 import { useEffect, useRef } from 'react';
 import {
@@ -15,7 +15,7 @@ import {
 } from 'three';
 import { rgbToThreeColor } from 'utils/style';
 import { cleanRenderer, cleanScene } from 'utils/three';
-import styles from './DisplacementSphere.module.css';
+import styles from './Metaball.module.css';
 import fragmentShader from './metaballFragment.glsl';
 import vertexShader from './metaballVertex.glsl';
 
@@ -37,6 +37,7 @@ export const Metaball = props => {
   const reduceMotion = useReducedMotion();
   const isInViewport = useInViewport(canvasRef);
   const windowSize = useWindowSize();
+  const scroll = useSpring(0, { stiffness: 40, damping: 18, mass: 1 });
 
   useEffect(() => {
     const { innerWidth, innerHeight } = window;
@@ -61,6 +62,7 @@ export const Metaball = props => {
       uColorB: { value: colorBright },
       // Push the blob toward the right so it sits beside the hero text.
       uOffset: { value: new Vector2(-0.62, -0.05) },
+      uScroll: { value: 0 },
     };
 
     material.current = new ShaderMaterial({
@@ -102,12 +104,34 @@ export const Metaball = props => {
     }
   }, [reduceMotion, windowSize]);
 
+  // Feed page scroll into a spring for smooth parallax drift.
+  useEffect(() => {
+    const handleScroll = () => scroll.set(window.scrollY);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scroll]);
+
+  // When the animation loop isn't running, still react to scroll with a render.
+  useEffect(() => {
+    const update = value => {
+      if (!uniforms.current) return;
+      uniforms.current.uScroll.value = (value / window.innerHeight) * 0.32;
+      if (reduceMotion || !isInViewport) {
+        renderer.current.render(scene.current, camera.current);
+      }
+    };
+    update(scroll.get());
+    return scroll.onChange(update);
+  }, [scroll, reduceMotion, isInViewport]);
+
   useEffect(() => {
     let animation;
 
     const animate = () => {
       animation = requestAnimationFrame(animate);
       uniforms.current.uTime.value = 0.0006 * (Date.now() - start.current);
+      uniforms.current.uScroll.value = (scroll.get() / window.innerHeight) * 0.32;
       renderer.current.render(scene.current, camera.current);
     };
 
@@ -120,7 +144,7 @@ export const Metaball = props => {
     return () => {
       cancelAnimationFrame(animation);
     };
-  }, [isInViewport, reduceMotion]);
+  }, [isInViewport, reduceMotion, scroll]);
 
   return (
     <Transition in timeout={2000}>

@@ -1,89 +1,95 @@
-import { Footer } from 'components/Footer';
+import { Heading } from 'components/Heading';
+import { Link } from 'components/Link';
 import { List, ListItem } from 'components/List';
 import { Meta } from 'components/Meta';
-import {
-  ProjectContainer,
-  ProjectHeader,
-  ProjectSection,
-  ProjectSectionContent,
-  ProjectSectionHeading,
-  ProjectSectionText,
-  ProjectTextRow,
-} from 'layouts/Project';
+import { Text } from 'components/Text';
+import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import styles from './Uses.module.css';
-import dynamic from 'next/dynamic';
-import { Link } from 'components/Link';
 
-const DisplacementSphere = dynamic(() =>
-  import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
+const Metaball = dynamic(() =>
+  import('layouts/Home/Metaball').then(mod => mod.Metaball)
 );
 
-export const Uses = () => {
-  return (
-    <Fragment>
-      <Meta
-        title="Skills"
-        description="Some of the skills I possess."
-      />
-      <ProjectContainer className={styles.uses}>
-        <DisplacementSphere />
-        <ProjectHeader
-          title="Skills"
-          description="Welcome to my portfolio! I thrive on a carefully curated toolkit of tools and skills that empower me to design and efficiently manage projects on a daily basis. Here is a glimpse into my indispensable arsenal"
-        />
-        <ProjectSection padding="none" className={styles.section}>
-          <ProjectSectionContent>
-            <ProjectTextRow width="m">
-              <ProjectSectionHeading>Business</ProjectSectionHeading>
-              <ProjectSectionText as="div">
-                <List>
-                  <ListItem>Stakeholder Management</ListItem>
-                  <ListItem>Strategy</ListItem>
-                  <ListItem>Communication</ListItem>
-                  <ListItem>Agile Project Management</ListItem>
-                  <ListItem>Product Management</ListItem>
-                  <ListItem>Project planning</ListItem>
-                  <ListItem>Scrum</ListItem>
-                </List>
-              </ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection padding="none" className={styles.section}>
-          <ProjectSectionContent>
-            <ProjectTextRow width="m">
-              <ProjectSectionHeading>Technical skills/tools</ProjectSectionHeading>
-              <ProjectSectionText as="div">
-                <List>
-                  <ListItem>Data Analysis</ListItem>
-                  <ListItem>Figma and balsamic prototype/ wireframe designing</ListItem>
-                  <ListItem>Confluence</ListItem>
-                  <ListItem>Jira</ListItem>
-                  <ListItem>Python Programming</ListItem>
-                  <ListItem>Microsoft Office (Excel/Powerpoint)</ListItem>
-                  <ListItem>Power BI</ListItem>
-                  <ListItem>Visio</ListItem>
-                </List>
-              </ProjectSectionText>
-            </ProjectTextRow>
-          </ProjectSectionContent>
-        </ProjectSection>
-      </ProjectContainer>
-      <ProjectSection padding="none" className={styles.section}>
-        <ProjectSectionContent>
-          <ProjectTextRow width="m">
-            <ProjectSectionHeading>Others</ProjectSectionHeading>
-            <ProjectSectionText as="div">
-              <List>
-                <ListItem>Written communication (check out my <Link href="https://medium.com/@adwitya">medium blogs</Link>)</ListItem>
-                <ListItem>Logo Designing (check out <Link href="https://www.behance.net/adwityaajha"> my Behance portfolio</Link>)</ListItem>
-              </List>
-            </ProjectSectionText>
-          </ProjectTextRow>
-        </ProjectSectionContent>
-      </ProjectSection>
-      <Footer />
-    </Fragment>
-  );
-};
+const businessSkills = [
+  'Stakeholder Management',
+  'Strategy',
+  'Communication',
+  'Agile Project Management',
+  'Product Management',
+  'Project Planning',
+  'Scrum',
+];
+
+const technicalSkills = [
+  'Data Analysis',
+  'Figma & Balsamiq wireframing / prototyping',
+  'Confluence',
+  'Jira',
+  'Python',
+  'Microsoft Office (Excel / PowerPoint)',
+  'Power BI',
+  'Visio',
+];
+
+export const Uses = () => (
+  <Fragment>
+    <Meta
+      title="Skills"
+      description="The toolkit of skills and tools Adwityaa Jha uses to design, lead, and deliver projects."
+    />
+    <Metaball />
+    <div className={styles.skills}>
+      <header className={styles.header}>
+        <Heading className={styles.title} level={2} as="h1">
+          Skills
+        </Heading>
+        <Text className={styles.intro} size="l" as="p">
+          A carefully curated toolkit of skills and tools I rely on to design, lead, and
+          deliver projects — spanning strategy and product through to the day-to-day craft
+          of getting things shipped.
+        </Text>
+      </header>
+
+      <div className={styles.grid}>
+        <section className={styles.card}>
+          <Heading className={styles.cardTitle} level={4} as="h2">
+            Business
+          </Heading>
+          <List className={styles.list}>
+            {businessSkills.map(skill => (
+              <ListItem key={skill}>{skill}</ListItem>
+            ))}
+          </List>
+        </section>
+
+        <section className={styles.card}>
+          <Heading className={styles.cardTitle} level={4} as="h2">
+            Technical &amp; Tools
+          </Heading>
+          <List className={styles.list}>
+            {technicalSkills.map(skill => (
+              <ListItem key={skill}>{skill}</ListItem>
+            ))}
+          </List>
+        </section>
+
+        <section className={styles.card}>
+          <Heading className={styles.cardTitle} level={4} as="h2">
+            Beyond Work
+          </Heading>
+          <List className={styles.list}>
+            <ListItem>
+              Written communication — read my{' '}
+              <Link href="https://medium.com/@adwitya">Medium blogs</Link>
+            </ListItem>
+            <ListItem>
+              Logo design — see my{' '}
+              <Link href="https://www.behance.net/adwityaajha">Behance portfolio</Link>
+            </ListItem>
+          </List>
+        </section>
+      </div>
+    </div>
+  </Fragment>
+);

@@ -1,4 +1,3 @@
-import { Divider } from 'components/Divider';
 import { Heading } from 'components/Heading';
 import { deviceModels } from 'components/Model/deviceModels';
 import { Section } from 'components/Section';
@@ -19,33 +18,22 @@ export const ProjectSummary = ({
   index,
   title,
   description,
-  model,
+  model = {},
   buttonText,
   buttonLink,
   alternate,
+  inline,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
   const { width } = useWindowSize();
   const titleId = `${id}-title`;
   const isMobile = width <= media.tablet;
-  const indexText = index < 10 ? `0${index}` : index;
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
 
   const renderDetails = visible => (
     <div className={styles.details}>
-      <div aria-hidden className={styles.index}>
-        <Divider
-          notchWidth="64px"
-          notchHeight="8px"
-          collapsed={!visible}
-          collapseDelay={1000}
-        />
-        <span className={styles.indexNumber} data-visible={visible}>
-          {indexText}
-        </span>
-      </div>
       <Heading
         level={3}
         as="h2"
@@ -125,6 +113,7 @@ export const ProjectSummary = ({
     <Section
       className={styles.summary}
       data-alternate={alternate}
+      data-inline={inline}
       data-first={index === 1}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
@@ -139,13 +128,14 @@ export const ProjectSummary = ({
         <Transition in={sectionVisible || focused}>
           {visible => (
             <>
-              {!alternate && !isMobile && (
+              {inline && renderDetails(visible)}
+              {!inline && !alternate && !isMobile && (
                 <>
                   {renderDetails(visible)}
                   {renderPreview(visible)}
                 </>
               )}
-              {(alternate || isMobile) && (
+              {!inline && (alternate || isMobile) && (
                 <>
                   {renderPreview(visible)}
                   {renderDetails(visible)}

@@ -56,6 +56,52 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* "Liquid glass" card matching the experiences/raymarching aesthetic. */
+.card {
+  padding: var(--space3XL);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      130% 120% at 100% 0%,
+      rgb(var(--rgbPrimary) / 0.1),
+      transparent 55%
+    ),
+    rgb(var(--rgbBackground) / 0.42);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgb(var(--rgbPrimary) / 0.16);
+  box-shadow:
+    0 30px 80px rgb(0 0 0 / 0.32),
+    0 0 70px -24px rgb(var(--rgbPrimary) / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  overflow: hidden;
+  isolation: isolate;
+  align-self: center;
+
+  /* Glossy specular bloom drifting off the top-right, like the blob's highlight. */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -40%;
+    right: -12%;
+    width: 60%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--rgbPrimary) / 0.22),
+      transparent 72%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+  }
+
+  @media (--mediaMobile) {
+    padding: var(--space2XL) var(--spaceXL);
+  }
+}
+
 .title {
   white-space: nowrap;
   margin-bottom: var(--spaceL);
@@ -80,9 +126,7 @@
 .tag {
   margin-top: 220px;
   margin-bottom: 40px;
-  display: grid;
-  grid-template-columns: var(--space4XL) 1fr;
-  gap: 12px;
+  display: flex;
   align-items: center;
 
   @media (--mediaTablet) {

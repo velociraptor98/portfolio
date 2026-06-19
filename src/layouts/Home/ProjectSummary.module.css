@@ -30,6 +30,24 @@
       margin-top: 0;
     }
   }
+
+  /* Inline mode: each summary is a flex item in the experiences row. */
+  &[data-inline='true'] {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: stretch;
+
+    @media (--mediaTablet) {
+      width: 100%;
+      max-width: 540px;
+      margin: 0;
+    }
+  }
 }
 
 .content {
@@ -47,6 +65,12 @@
     grid-template-columns: 1fr var(--textColumnWidth);
   }
 
+  @nest .summary[data-inline='true'] & {
+    grid-template-columns: 100%;
+    max-width: none;
+    height: 100%;
+  }
+
   @media (--mediaLaptop) {
     --textColumnWidth: 40%;
   }
@@ -62,16 +86,65 @@
   }
 }
 
+/* "Liquid glass" card echoing the raymarched metaball: a translucent slab with
+   a soft teal bloom and a glossy specular highlight, no hard accents. */
 .details {
   z-index: var(--zIndex1);
   position: relative;
+  padding: var(--space3XL) var(--space2XL);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      130% 120% at 100% 0%,
+      rgb(var(--rgbPrimary) / 0.1),
+      transparent 55%
+    ),
+    rgb(var(--rgbBackground) / 0.42);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgb(var(--rgbPrimary) / 0.16);
+  box-shadow:
+    0 30px 80px rgb(0 0 0 / 0.32),
+    0 0 70px -24px rgb(var(--rgbPrimary) / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  overflow: hidden;
+  isolation: isolate;
+
+  /* Fill the inline card so a row of experiences shares an even height. */
+  @nest .summary[data-inline='true'] & {
+    height: 100%;
+    padding: var(--space2XL);
+  }
+
+  /* Glossy specular bloom drifting off the top-right, like the blob's highlight. */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -45%;
+    right: -15%;
+    width: 70%;
+    height: 90%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--rgbPrimary) / 0.22),
+      transparent 72%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+  }
 
   @media (--mediaTablet) {
     flex: 0 0 auto;
-    max-width: 410px;
+    max-width: 460px;
     grid-row: 2;
     grid-column: 1;
     justify-self: center;
+  }
+
+  @media (--mediaMobile) {
+    padding: var(--space2XL) var(--spaceXL);
   }
 }
 
@@ -177,36 +250,6 @@
       width: 80%;
       bottom: 23%;
     }
-  }
-}
-
-.index {
-  position: relative;
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: var(--spaceM);
-  align-items: center;
-  margin-bottom: var(--spaceXL);
-}
-
-.indexNumber {
-  font-size: var(--fontSizeBodyS);
-  font-weight: var(--fontWeightMedium);
-  color: rgb(var(--rgbPrimary));
-  opacity: 0;
-  transition-property: opacity;
-  transition-timing-function: var(--bezierFastoutSlowin);
-  transition-duration: var(--durationM);
-  transition-delay: 1.3s;
-
-  @media (--mediaUseMotion) {
-    transition-property: transform, opacity;
-    transform: translateX(calc(var(--spaceM) * -1));
-  }
-
-  &[data-visible='true'] {
-    transform: translateX(0);
-    opacity: 1;
   }
 }
 

@@ -1,10 +1,6 @@
 button.toggle {
-  --offset: var(--spaceXS);
-  --inset: calc(var(--spaceOuter) - var(--offset));
-
-  position: fixed;
-  top: var(--inset);
-  right: var(--inset);
+  position: relative;
+  margin-left: auto;
   z-index: var(--zIndex4);
   display: none;
 

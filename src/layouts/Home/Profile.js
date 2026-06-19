@@ -2,7 +2,6 @@ import profileImg from 'assets/profile-large.jpeg';
 import profileImgPlaceholder from 'assets/profile-placeholder.jpg';
 import { Button } from 'components/Button';
 import { DecoderText } from 'components/DecoderText';
-import { Divider } from 'components/Divider';
 import { Heading } from 'components/Heading';
 import { Image } from 'components/Image';
 import { Link } from 'components/Link';
@@ -10,7 +9,7 @@ import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { Transition } from 'components/Transition';
 import { Fragment, useState } from 'react';
-import { media } from 'utils/style';
+import { classes, media } from 'utils/style';
 import styles from './Profile.module.css';
 
 const ProfileText = ({ visible, titleId }) => (
@@ -46,11 +45,10 @@ export const Profile = ({ id, visible, sectionRef }) => {
       <Transition in={visible || focused} timeout={0}>
         {visible => (
           <div className={styles.content}>
-            <div className={styles.column}>
+            <div className={classes(styles.column, styles.card)}>
               <ProfileText visible={visible} titleId={titleId} />
               {/* Make correct email address here */}
               <Button
-                secondary
                 className={styles.button}
                 data-visible={visible}
                 href="mailto:ajha3110@gmail.com"
@@ -61,12 +59,6 @@ export const Profile = ({ id, visible, sectionRef }) => {
             </div>
             <div className={styles.column}>
               <div className={styles.tag} aria-hidden>
-                <Divider
-                  notchWidth="64px"
-                  notchHeight="8px"
-                  collapsed={!visible}
-                  collapseDelay={1000}
-                />
                 <div className={styles.tagText} data-visible={visible}>
                   About Me
                 </div>

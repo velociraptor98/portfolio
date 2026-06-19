@@ -1,6 +1,6 @@
 export const navLinks = [
   {
-    label: 'Projects',
+    label: 'Experiences',
     pathname: '/#project-1',
   },
   {
@@ -11,13 +11,8 @@ export const navLinks = [
 
 export const socialLinks = [
   {
-    label: 'Github',
-    url: 'https://github.com/addyj420',
-    icon: 'github',
-  },
-  {
     label: 'Linkedin',
     url: 'https://www.linkedin.com/in/adwityaajha/',
     icon: 'linkedin',
-  }
+  },
 ];

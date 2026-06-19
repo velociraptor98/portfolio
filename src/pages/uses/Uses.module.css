@@ -1,18 +1,106 @@
-.uses {
-  --maxWidthL: var(--maxWidthM);
+.skills {
+  position: relative;
+  min-height: 100vh;
+  max-width: var(--maxWidthL);
+  margin: 0 auto;
+  padding: 180px var(--spaceOuter) var(--space4XL);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space4XL);
+
+  @media (--mediaMobile) {
+    padding-top: 130px;
+    gap: var(--space3XL);
+  }
 }
 
-.section {
-  opacity: 0;
-  padding-top: var(--space2XL);
-  padding-bottom: var(--space2XL);
-  margin-top: var(--space2XL);
+.header {
+  max-width: var(--maxWidthM);
+}
 
-  &:global {
-    animation: fadeIn 1s ease 1s forwards;
+.title {
+  margin-bottom: var(--spaceL);
+}
+
+.intro {
+  color: var(--colorTextLight);
+  max-width: 54ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+  gap: var(--spaceL);
+  align-items: start;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
   }
 
-  & + & {
-    margin-top: 0;
+  to {
+    opacity: 1;
+    transform: none;
   }
+}
+
+/* "Liquid glass" card matching the experiences/details raymarching aesthetic. */
+.card {
+  position: relative;
+  padding: var(--space2XL);
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      130% 120% at 100% 0%,
+      rgb(var(--rgbPrimary) / 0.1),
+      transparent 55%
+    ),
+    rgb(var(--rgbBackground) / 0.42);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgb(var(--rgbPrimary) / 0.16);
+  box-shadow:
+    0 30px 80px rgb(0 0 0 / 0.32),
+    0 0 70px -24px rgb(var(--rgbPrimary) / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  overflow: hidden;
+  isolation: isolate;
+  animation: cardReveal 0.7s var(--bezierFastoutSlowin) both;
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  /* Glossy specular bloom drifting off the top-right, like the blob's highlight. */
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -40%;
+    right: -12%;
+    width: 60%;
+    height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--rgbPrimary) / 0.22),
+      transparent 72%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+  }
+}
+
+.cardTitle {
+  margin-bottom: var(--spaceL);
+}
+
+.list {
+  margin: 0;
 }

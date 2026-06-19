@@ -1,10 +1,14 @@
-import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
 import { Profile } from 'layouts/Home/Profile';
 import { ProjectSummary } from 'layouts/Home/ProjectSummary';
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
+
+const Metaball = dynamic(() =>
+  import('layouts/Home/Metaball').then(mod => mod.Metaball)
+);
 
 const disciplines = ['Project', 'Product', 'Design'];
 
@@ -14,12 +18,11 @@ export const Home = () => {
   const intro = useRef();
   const projectOne = useRef();
   const projectTwo = useRef();
-  // const projectThree = useRef();
+  const projectThree = useRef();
   const details = useRef();
 
   useEffect(() => {
-    // const sections = [intro, projectOne, projectTwo, projectThree, details];
-    const sections = [intro, projectOne, projectTwo, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -56,6 +59,7 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
+      <Metaball />
       <Meta
         title="Business Strategy & Project Management"
         description="Portfolio of Adwityaa Jha."
@@ -66,36 +70,40 @@ export const Home = () => {
         disciplines={disciplines}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
-      <ProjectSummary
-        id="project-1"
-        sectionRef={projectOne}
-        visible={visibleSections.includes(projectOne.current)}
-        index={1}
-        title="Deutsche Bank "
-        description="Implementing Agile methodologies in the investment banking sector while harnessing the inevitability of change rather than resisting it"
-        model={{
-          type: 'none',
-          alt: 'Deutsche Bank project',
-        }}
-      />
-      <ProjectSummary
-        id="project-2"
-        sectionRef={projectTwo}
-        visible={visibleSections.includes(projectTwo.current)}
-        index={2}
-        title="Atrasa"
-        description="Developing a platform for connecting underprivileged South Asian women artisans to the world."
-        model={{
-          type: 'none',
-          alt: 'Atrasa project',
-        }}
-      />
+      <div className={styles.experiences} id="experiences">
+        <ProjectSummary
+          inline
+          id="project-3"
+          sectionRef={projectThree}
+          visible={visibleSections.includes(projectThree.current)}
+          index={1}
+          title="Total Business Hotties"
+          description="Founding and scaling a women-focused professional networking community — driving engagement, events, partnerships, and content strategy that grew its audience, reach, and brand."
+        />
+        <ProjectSummary
+          inline
+          id="project-1"
+          sectionRef={projectOne}
+          visible={visibleSections.includes(projectOne.current)}
+          index={2}
+          title="Deutsche Bank"
+          description="Implementing Agile methodologies in the investment banking sector while harnessing the inevitability of change rather than resisting it."
+        />
+        <ProjectSummary
+          inline
+          id="project-2"
+          sectionRef={projectTwo}
+          visible={visibleSections.includes(projectTwo.current)}
+          index={3}
+          title="Atrasa"
+          description="Developing a platform for connecting underprivileged South Asian women artisans to the world."
+        />
+      </div>
       <Profile
         sectionRef={details}
         visible={visibleSections.includes(details.current)}
         id="details"
       />
-      <Footer />
     </div>
   );
 };

@@ -9,6 +9,7 @@ uniform vec3 uBackground;
 uniform vec3 uColorA; // deep teal (shadow side)
 uniform vec3 uColorB; // bright teal (lit side / rim)
 uniform vec2 uOffset; // shifts the blob within the frame
+uniform float uScroll; // parallax drift driven by page scroll
 
 varying vec2 vUv;
 
@@ -51,6 +52,8 @@ void main() {
   // Aspect-correct, centered coordinates with a compositional offset.
   vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y;
   uv += uOffset;
+  // Drift the blob down as the page scrolls, for a parallax feel.
+  uv.y += uScroll;
 
   vec3 ro = vec3(0.0, 0.0, 5.2);
   vec3 rd = normalize(vec3(uv, -1.6));
