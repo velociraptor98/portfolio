@@ -60,7 +60,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="BizStrat"
+        title="Business Strategy & Project Management"
         description="Portfolio of Adwityaa Jha."
       />
       <Intro
