@@ -43,7 +43,12 @@ void main() {
 
   vec3 color = vec3(vUv * (0.2 - 2.0 * noise), 1.0);
   vec3 finalColors = vec3(color.g * 1.5, color.b, color.g);
-  vec4 diffuseColor = vec4(cos(finalColors * noise * 3.0), 1.0);
+  // Map the procedural pattern onto a teal gradient for an on-brand hero
+  vec3 pattern = cos(finalColors * noise * 3.0);
+  float lum = clamp(dot(pattern, vec3(0.3333)) * 0.5 + 0.5, 0.0, 1.0);
+  vec3 tealDark = vec3(0.02, 0.16, 0.18);
+  vec3 tealBright = vec3(0.11, 0.83, 0.75);
+  vec4 diffuseColor = vec4(mix(tealDark, tealBright, lum), 1.0);
   ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
   vec3 totalEmissiveRadiance = emissive;
 

@@ -1,6 +1,3 @@
-import sprTextureLarge from 'assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from 'assets/spr-lesson-builder-dark.jpg';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -78,13 +75,7 @@ export const Home = () => {
         description="Implementing Agile methodologies in the investment banking sector while harnessing the inevitability of change rather than resisting it"
         model={{
           type: 'none',
-          alt: 'Smart Sparrow lesson builder',
-          textures: [
-            {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
-            },
-          ],
+          alt: 'Deutsche Bank project',
         }}
       />
       <ProjectSummary
@@ -96,13 +87,7 @@ export const Home = () => {
         description="Developing a platform for connecting underprivileged South Asian women artisans to the world."
         model={{
           type: 'none',
-          alt: 'Smart Sparrow lesson builder',
-          textures: [
-            {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
-            },
-          ],
+          alt: 'Atrasa project',
         }}
       />
       <Profile

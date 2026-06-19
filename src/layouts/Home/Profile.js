@@ -1,6 +1,5 @@
-import profileImgLarge from 'assets/profile-large.jpeg';
-import profileImgPlaceholder from 'assets/profile-placeholder.jpg';
 import profileImg from 'assets/profile-large.jpeg';
+import profileImgPlaceholder from 'assets/profile-placeholder.jpg';
 import { Button } from 'components/Button';
 import { DecoderText } from 'components/DecoderText';
 import { Divider } from 'components/Divider';
@@ -77,9 +76,9 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   reveal
                   delay={100}
                   placeholder={profileImgPlaceholder}
-                  srcSet={[profileImg, profileImgLarge]}
+                  srcSet={[profileImg]}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
-                  alt="Me standing"
+                  alt="Adwityaa Jha"
                 />
                 <svg
                   aria-hidden="true"
