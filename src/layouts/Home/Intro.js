@@ -15,7 +15,7 @@ import { cssProps } from 'utils/style';
 import styles from './Intro.module.css';
 
 const DisplacementSphere = dynamic(() =>
-  import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
+  import('layouts/Home/Metaball').then(mod => mod.Metaball)
 );
 
 export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...rest }) {
