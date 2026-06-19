@@ -23,6 +23,18 @@ export const Navbar = () => {
   const headerRef = useRef();
   const isMobile = windowSize.width <= media.mobile || windowSize.height <= 696;
   const scrollToHash = useScrollToHash();
+  const [scrolled, setScrolled] = useState(false);
+
+  // Float as a pill on the hero; pin full-width to the top once scrolled, and
+  // always stay pinned on pages other than the home hero.
+  const pinned = scrolled || route !== '/';
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 48);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     // Prevent ssr mismatch by storing this in state
@@ -140,7 +152,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className={styles.navbar} ref={headerRef}>
+    <header className={styles.navbar} data-pinned={pinned} ref={headerRef}>
       <RouterLink legacyBehavior href={route === '/' ? '/#intro' : '/'} scroll={false}>
         <a
           data-navbar-item

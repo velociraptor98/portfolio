@@ -21,6 +21,23 @@
     0 24px 60px rgb(0 0 0 / 0.28),
     0 0 50px -22px rgb(var(--rgbPrimary) / 0.3),
     inset 0 1px 0 rgb(255 255 255 / 0.05);
+  transition-property: top, left, right, padding, border-radius, background, box-shadow,
+    border-color;
+  transition-duration: var(--durationM);
+  transition-timing-function: var(--bezierFastoutSlowin);
+
+  /* Pinned: morph from the floating pill into a full-width top bar. */
+  &[data-pinned='true'] {
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spaceS) var(--space2XL);
+    border-radius: 0;
+    border-color: transparent;
+    border-bottom-color: rgb(var(--rgbPrimary) / 0.16);
+    background: rgb(var(--rgbBackground) / 0.7);
+    box-shadow: 0 12px 40px -18px rgb(0 0 0 / 0.5);
+  }
 
   @media (--mediaMobile), (--mediaMobileLS) {
     --headerNavFontSize: calc((22 / 16) * 1rem);
@@ -29,6 +46,10 @@
     left: var(--spaceM);
     right: var(--spaceM);
     padding: var(--spaceXS) var(--spaceM);
+
+    &[data-pinned='true'] {
+      padding: var(--spaceXS) var(--spaceM);
+    }
   }
 }
 
