@@ -62,7 +62,7 @@ export const Home = () => {
       <Metaball />
       <Meta
         title="Business Strategy & Project Management"
-        description="Portfolio of Adwityaa Jha."
+        description="Portfolio of Adwityaa Jha — business strategy, product, and project management. Selected experiences, skills, and a way to get in touch."
       />
       <Intro
         id="intro"

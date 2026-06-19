@@ -165,6 +165,9 @@
 .mobileNav {
   position: fixed;
   inset: 0;
+  /* Above all page content (max z-index 16) but below the navbar bar (32),
+     so the full-screen menu covers the page while the close button stays on top. */
+  z-index: 24;
   background:
     radial-gradient(
       120% 80% at 80% 0%,

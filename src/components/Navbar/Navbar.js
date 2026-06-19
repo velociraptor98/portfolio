@@ -152,35 +152,38 @@ export const Navbar = () => {
   };
 
   return (
-    <header className={styles.navbar} data-pinned={pinned} ref={headerRef}>
-      <RouterLink legacyBehavior href={route === '/' ? '/#intro' : '/'} scroll={false}>
-        <a
-          data-navbar-item
-          className={styles.logo}
-          aria-label="Adwityaa Jha, PM"
-          onClick={handleMobileNavClick}
-        >
-          <Monogram highlight />
-        </a>
-      </RouterLink>
-      <NavToggle onClick={() => dispatch({ type: 'toggleMenu' })} menuOpen={menuOpen} />
-      <nav className={styles.nav}>
-        <div className={styles.navList}>
-          {navLinks.map(({ label, pathname }) => (
-            <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
-              <a
-                data-navbar-item
-                className={styles.navLink}
-                aria-current={getCurrent(pathname)}
-                onClick={handleNavItemClick}
-              >
-                {label}
-              </a>
-            </RouterLink>
-          ))}
-        </div>
-        <NavbarIcons desktop />
-      </nav>
+    <>
+      <header className={styles.navbar} data-pinned={pinned} ref={headerRef}>
+        <RouterLink legacyBehavior href={route === '/' ? '/#intro' : '/'} scroll={false}>
+          <a
+            data-navbar-item
+            className={styles.logo}
+            aria-label="Adwityaa Jha, PM"
+            onClick={handleMobileNavClick}
+          >
+            <Monogram highlight />
+          </a>
+        </RouterLink>
+        <NavToggle onClick={() => dispatch({ type: 'toggleMenu' })} menuOpen={menuOpen} />
+        <nav className={styles.nav}>
+          <div className={styles.navList}>
+            {navLinks.map(({ label, pathname }) => (
+              <RouterLink legacyBehavior href={pathname} scroll={false} key={label}>
+                <a
+                  data-navbar-item
+                  className={styles.navLink}
+                  aria-current={getCurrent(pathname)}
+                  onClick={handleNavItemClick}
+                >
+                  {label}
+                </a>
+              </RouterLink>
+            ))}
+          </div>
+          <NavbarIcons desktop />
+        </nav>
+        {!isMobile && <ThemeToggle data-navbar-item />}
+      </header>
       <Transition unmount in={menuOpen} timeout={msToNum(tokens.base.durationL)}>
         {visible => (
           <nav className={styles.mobileNav} data-visible={visible}>
@@ -206,8 +209,7 @@ export const Navbar = () => {
           </nav>
         )}
       </Transition>
-      {!isMobile && <ThemeToggle data-navbar-item />}
-    </header>
+    </>
   );
 };
 

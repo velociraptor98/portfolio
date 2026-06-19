@@ -1,25 +1,22 @@
 {
   "short_name": "Adwityaa Jha",
   "name": "Adwityaa Jha — Business Strategy & Project Management Portfolio",
+  "description": "Portfolio of Adwityaa Jha — business strategy, product, and project management.",
   "icons": [
     {
-      "src": "favicon.png",
-      "sizes": "64x64",
-      "type": "image/png"
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
     },
     {
       "src": "favicon.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "favicon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "sizes": "60x60"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#111111",
-  "background_color": "#111111"
+  "theme_color": "#0c0c0c",
+  "background_color": "#0c0c0c"
 }
