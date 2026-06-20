@@ -56,7 +56,6 @@ export const Profile = ({ id, visible, sectionRef }) => {
             <div className={styles.content}>
             <div className={classes(styles.column, styles.card)}>
               <ProfileText visible={visible} titleId={titleId} />
-              {/* Make correct email address here */}
               <Button
                 className={styles.button}
                 data-visible={visible}
@@ -81,15 +80,6 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
                   alt="Adwityaa Jha"
                 />
-                <svg
-                  aria-hidden="true"
-                  width="135"
-                  height="765"
-                  viewBox="0 0 135 765"
-                  className={styles.svg}
-                  data-visible={visible}
-                >
-                </svg>
               </div>
             </div>
             </div>

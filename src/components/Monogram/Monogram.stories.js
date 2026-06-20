@@ -7,6 +7,6 @@ export default {
 
 export const Default = () => (
   <StoryContainer>
-    <Monogram highlight />
+    <Monogram />
   </StoryContainer>
 );

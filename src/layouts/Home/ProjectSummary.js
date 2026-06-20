@@ -1,3 +1,4 @@
+import { Button } from 'components/Button';
 import { Heading } from 'components/Heading';
 import { deviceModels } from 'components/Model/deviceModels';
 import { Section } from 'components/Section';
@@ -46,6 +47,18 @@ export const ProjectSummary = ({
       <Text className={styles.description} data-visible={visible} as="p">
         {description}
       </Text>
+      {buttonLink && (
+        <Button
+          secondary
+          className={styles.button}
+          data-visible={visible}
+          href={buttonLink}
+          iconHoverShift
+          iconEnd="arrowRight"
+        >
+          {buttonText}
+        </Button>
+      )}
     </div>
   );
 

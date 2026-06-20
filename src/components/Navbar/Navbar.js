@@ -161,7 +161,7 @@ export const Navbar = () => {
             aria-label="Adwityaa Jha, PM"
             onClick={handleMobileNavClick}
           >
-            <Monogram highlight />
+            <Monogram />
           </a>
         </RouterLink>
         <NavToggle onClick={() => dispatch({ type: 'toggleMenu' })} menuOpen={menuOpen} />

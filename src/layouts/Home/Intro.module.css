@@ -205,7 +205,11 @@
 .line {
   content: '';
   height: 2px;
-  background: rgb(var(--rgbText) / 0.3);
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgbPrimary) / 0.7),
+    rgb(var(--rgbText) / 0.15)
+  );
   width: 120%;
   display: flex;
   margin-left: 20px;

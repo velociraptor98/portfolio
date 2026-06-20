@@ -31,8 +31,11 @@ export const Home = () => {
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
-            setVisibleSections(prevSections => [...prevSections, section]);
+            setVisibleSections(prevSections =>
+              prevSections.includes(section)
+                ? prevSections
+                : [...prevSections, section]
+            );
           }
         });
       },
@@ -56,7 +59,7 @@ export const Home = () => {
       sectionObserver.disconnect();
       indicatorObserver.disconnect();
     };
-  }, [visibleSections]);
+  }, []);
 
   return (
     <div className={styles.home}>
@@ -84,6 +87,8 @@ export const Home = () => {
             index={1}
             title="Total Business Hotties"
             description="Founding and scaling a women-focused professional networking community — driving engagement, events, partnerships, and content strategy that grew its audience, reach, and brand."
+            buttonText="Visit the site"
+            buttonLink="https://totalbusinesshotties.com/"
           />
           <ProjectSummary
             inline
@@ -92,7 +97,7 @@ export const Home = () => {
             visible={visibleSections.includes(projectOne.current)}
             index={2}
             title="Deutsche Bank"
-            description="Implementing Agile methodologies in the investment banking sector while harnessing the inevitability of change rather than resisting it."
+            description="Designed an AI governance framework across the full AI lifecycle and drove 2M+ Euros in savings through process optimisation — leading global deployments of Movius.ai and Zoom for Private Bank and translating technical analysis into investment decisions."
           />
           <ProjectSummary
             inline

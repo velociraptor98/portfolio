@@ -181,22 +181,14 @@
 .image {
   position: relative;
   width: 100%;
-}
-
-.svg {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  transform: translate3d(50%, -20%, 0);
-  height: 100%;
-  z-index: var(--zIndex3);
-  opacity: 0;
-  transition: opacity var(--durationM) ease var(--durationL);
-  fill: var(--colorTextTitle);
-
-  &[data-visible='true'] {
-    opacity: 1;
-  }
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgb(var(--rgbPrimary) / 0.16);
+  box-shadow:
+    0 30px 80px rgb(0 0 0 / 0.32),
+    0 0 70px -24px rgb(var(--rgbPrimary) / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  isolation: isolate;
 }
 
 .button {
