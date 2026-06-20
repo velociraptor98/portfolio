@@ -1,6 +1,7 @@
 .monogram {
+  color: var(--colorTextTitle);
   fill: var(--colorTextTitle);
-  transition: fill var(--durationL) ease;
+  transition: color var(--durationL) ease, fill var(--durationL) ease;
 }
 
 .highlight {

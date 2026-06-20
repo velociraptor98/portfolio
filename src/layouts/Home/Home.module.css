@@ -5,18 +5,38 @@
 /* Experiences laid out inline as a row of cards (stacks on smaller screens). */
 .experiences {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  max-width: var(--maxWidthXL);
+  margin: 0 auto;
+  padding: var(--space4XL) var(--spaceOuter);
+
+  /* Stacked cards can grow past the viewport — fall back to natural height. */
+  @media (--mediaTablet) {
+    min-height: 0;
+    padding: var(--space5XL) var(--spaceOuter);
+  }
+}
+
+.experiencesRow {
+  display: flex;
   align-items: stretch;
   justify-content: center;
   gap: var(--spaceL);
   width: 100%;
-  max-width: var(--maxWidthXL);
-  margin: 0 auto;
-  padding: var(--space5XL) var(--spaceOuter);
+  margin-top: var(--space3XL);
 
   @media (--mediaTablet) {
     flex-direction: column;
     align-items: center;
     gap: var(--spaceXL);
-    padding: var(--space4XL) var(--spaceOuter);
+    margin-top: var(--space2XL);
   }
+}
+
+.sectionHeading {
+  text-align: center;
 }

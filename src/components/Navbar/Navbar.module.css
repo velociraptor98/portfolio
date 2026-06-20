@@ -142,6 +142,9 @@
   padding: var(--spaceS);
   width: var(--space2XL);
   height: var(--space2XL);
+  /* Some source SVGs ship oversized intrinsic dimensions (the LinkedIn icon is
+     800x800); clip so a stray icon can never overflow and capture clicks. */
+  overflow: hidden;
   border-radius: 50%;
   color: var(--colorTextLight);
   transition-property: color, background, box-shadow;
@@ -158,6 +161,8 @@
 }
 
 .navIcon {
+  width: var(--spaceL);
+  height: var(--spaceL);
   fill: currentColor;
   transition: fill var(--durationM) ease;
 }

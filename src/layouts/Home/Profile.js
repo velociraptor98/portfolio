@@ -44,7 +44,16 @@ export const Profile = ({ id, visible, sectionRef }) => {
     >
       <Transition in={visible || focused} timeout={0}>
         {visible => (
-          <div className={styles.content}>
+          <div className={styles.inner}>
+            <Heading
+              className={styles.sectionHeading}
+              data-visible={visible}
+              level={2}
+              align="center"
+            >
+              Details
+            </Heading>
+            <div className={styles.content}>
             <div className={classes(styles.column, styles.card)}>
               <ProfileText visible={visible} titleId={titleId} />
               {/* Make correct email address here */}
@@ -82,6 +91,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                 >
                 </svg>
               </div>
+            </div>
             </div>
           </div>
         )}
