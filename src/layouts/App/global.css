@@ -13,6 +13,18 @@
   --mobileNavOffset: calc(var(--spaceOuter) * 2 + var(--space2XL));
 }
 
+/* Snap the page to each top-level section as the user scrolls. Proximity
+   (not mandatory) so sections taller than the viewport don't trap scrolling. */
+html {
+  scroll-snap-type: y proximity;
+}
+
+@media (--mediaReduceMotion) {
+  html {
+    scroll-snap-type: none;
+  }
+}
+
 body {
   font-family: var(--fontStack);
   font-weight: var(--fontWeightRegular);
